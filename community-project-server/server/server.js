@@ -13,7 +13,7 @@ const port = 3000;
 
 (async()=>{
     await storage.init({dir: "./data"});
-
+// server side
     server.get("/api/projects", async(req,res)=>{  
         res.json(await storage.valuesWithKeyMatch(/project-/));   
     });
