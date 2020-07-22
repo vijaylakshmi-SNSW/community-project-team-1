@@ -9,7 +9,7 @@ module.exports = {
     },
     
     validatePostcode: function (postcode) {
-        if (Number(postcode[0]) != 2 && Number(postcode.length) != 4) {
+        if (postcode.toString().charAt(0) != 2 && Number(postcode.length) != 4) {
             return false;
         }
         return true;

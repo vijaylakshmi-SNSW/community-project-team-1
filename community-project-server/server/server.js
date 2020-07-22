@@ -9,7 +9,9 @@ server.use(express.json());
 server.use(bodyParser.json());
 server.use(cors());
 const port = 3000;
-const { validateGivenName, validatePostcode } = require('./validate');
+const { validateGivenName, validatePostcode, validateDescription } = require('./validate');
+
+
 
 (async () => {
     await storage.init({ dir: "./data" });
@@ -26,6 +28,7 @@ const { validateGivenName, validatePostcode } = require('./validate');
     server.post("/api/projects/submit", async (req, res) => {
         let data = req.body;
         let givenName = req.body.givenName;
+        let lastName = req.body.lastName;
         let postcode = req.body.postcode;
         let description =req.body.description;
         if (!validatePostcode(postcode)) {
@@ -34,7 +37,7 @@ const { validateGivenName, validatePostcode } = require('./validate');
         if (!validateGivenName(givenName)) {
             res.json({ status: 500, error: "Given name can only have 50 charecters" });
         }
-        if (!Description(description)){
+        if (!validateDescription(description)){
             res.json({status:500, error: "Description should not exceed 300 charecters"});
         }
         let project = {
@@ -66,3 +69,5 @@ const { validateGivenName, validatePostcode } = require('./validate');
 
     server.listen(port, () => console.log(`Server listening at port ${port}`));
 })();
+
+module.exports = server;
