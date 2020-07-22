@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const storage = require('node-persist');
-const projects = require('../projects.json');
 const server = express();
 server.use(express.json());
 server.use(bodyParser.json());
