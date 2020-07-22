@@ -12,6 +12,8 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/home" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/project-registry" component={ProjectsRegistry} />
         </Switch>
       </Router>
     </div>

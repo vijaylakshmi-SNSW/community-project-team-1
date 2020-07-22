@@ -14,7 +14,7 @@ export default function Nav() {
                 <Link to="/about">
                     <li>About</li>
                 </Link>
-                <Link to="/projects">
+                <Link to="/project-registry">
                     <li>Projects</li>
                 </Link>
             </ul>
