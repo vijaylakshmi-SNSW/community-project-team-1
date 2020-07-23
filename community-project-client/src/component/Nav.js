@@ -11,11 +11,11 @@ export default function Nav() {
                 <Link to="/home">
                     <li>Home</li>
                 </Link>
-                <Link to="/about">
-                    <li>About</li>
-                </Link>
                 <Link to="/project-registry">
-                    <li>Projects</li>
+                    <li>Submit</li>
+                </Link>
+                <Link to="/view-all">
+                    <li>View All</li>
                 </Link>
             </ul>
         </div>

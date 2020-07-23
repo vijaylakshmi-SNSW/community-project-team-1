@@ -26,7 +26,15 @@ export default function ProjectsSubmitRegistry(props) {
         })
             .then(response => response.json())
             .then(json => {
-                props.submitProject(json.project);
+                if(json.status === 200) {
+                    props.submitProject(json.project);
+                    setGivenName("");
+                    setSurname("");
+                    setPostcode("");
+                    setDescription("");
+                } else {
+                    alert("There was an error");
+                }
             });
     }
 

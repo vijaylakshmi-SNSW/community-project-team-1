@@ -3,12 +3,10 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
-import About from "./component/About";
+import ViewAll from "./component/ViewProjects";
 import ProjectsRegistry from "./component/projectsRegistry/ProjectsRegistry"
 
 function App() {
-
-
 
   return (
     <div>
@@ -16,8 +14,8 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/home" component={Home} />
-          <Route path="/about" component={About} />
           <Route path="/project-registry" component={ProjectsRegistry} />
+          <Route path="/view-all" component={ViewAll} />
         </Switch>
       </Router>
     </div>
