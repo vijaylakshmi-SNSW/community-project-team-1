@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import ProjectsSubmit from "./ProjectsSubmitRegistry";
+import ProjectsSubmitRegistry from "./ProjectsSubmitRegistry";
 
 export default function ProjectsRegistry() {
 
     const [projects, setProjects] = useState([])
 
     useEffect(()=>{
-        fetch("http://localhost:3000/api/projects")
+        fetch("http://localhost:4000/api/projects")
         .then(res=>res.json())
-        .then(projects=>res.json(projects));
+        .then(projects=>setProjects(projects));
     },[]);
 
     const submitProject = p => {
-        setProjects(...projects, p);
+        setProjects({...projects, p});
     }
 
     return(

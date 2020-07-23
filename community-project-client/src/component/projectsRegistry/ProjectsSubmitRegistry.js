@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function ProjectsSubmitRegistry(props) {
 
@@ -11,13 +11,13 @@ export default function ProjectsSubmitRegistry(props) {
         e.preventDefault();
 
         let project = {
-            givenName = givenName,
-            surname = surname,
-            postcode = postcode,
-            description = description
+            givenName: givenName,
+            surname: surname,
+            postcode: postcode,
+            description: description
         }
 
-        fetch('http://localhost:3000/api/projects/submit', {
+        fetch('http://localhost:4000/api/projects/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
