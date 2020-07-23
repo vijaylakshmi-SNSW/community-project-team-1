@@ -5,10 +5,10 @@ export default function ProjectsSubmitRegistry(props) {
     const [givenName, setGivenName] = useState("");
     const [surname, setSurname] = useState("");
     const [postcode, setPostcode] = useState("");
+    const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [projectSubmittReceived, setProjectSubmittReceived] = useState(false);
     const [projectSubmittNotReceived, setProjectSubmittNotReceived] = useState(false);
-    const [givenName]
 
     const handleSubmitButton = e => {
         e.preventDefault();
@@ -17,6 +17,7 @@ export default function ProjectsSubmitRegistry(props) {
             givenName: givenName,
             surname: surname,
             postcode: postcode,
+            title: title,
             description: description
         }
 
@@ -34,9 +35,9 @@ export default function ProjectsSubmitRegistry(props) {
                     setGivenName("");
                     setSurname("");
                     setPostcode("");
+                    setTitle("");
                     setDescription("");
                     setProjectSubmittReceived(true);
-
                 } else {
                     setProjectSubmittNotReceived(true);
                 }
@@ -47,11 +48,13 @@ export default function ProjectsSubmitRegistry(props) {
         <div>
             <form className="projects-submit-registry-form">
                 <label>Given Name/s:</label>
-                <input placeholder="Enter Given Name here" onChange={e => setGivenName(e.target.value)} value={givenName}></input>
+                <input placeholder="Enter Given Name here" onChange={e => setGivenName(e.target.value)} value={givenName} required></input>
                 <label>Surname:</label>
                 <input placeholder="Enter Surname here" onChange={e => setSurname(e.target.value)} value={surname}></input>
                 <label>Postcode:</label>
                 <input placeholder="Enter Postcode here" onChange={e => setPostcode(e.target.value)} value={postcode}></input>
+                <label>Title of Project:</label>
+                <input placeholder="Enter Title here" onChange={e=>setTitle(e.target.value)} value={title}></input>
                 <label>Description of Project:</label>
                 <input placeholder="Enter Description here" onChange={e => setDescription(e.target.value)} value={description}></input>
                 <button onClick={handleSubmitButton}>Submit</button>
