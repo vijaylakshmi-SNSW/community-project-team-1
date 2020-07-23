@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./component/Home";
 import Nav from "./component/Nav";
 import ViewAll from "./component/ViewProjects";
-import ProjectsRegistry from "./component/projectsRegistry/ProjectsRegistry"
+import ProjectsRegistry from "./component/projectsRegistry/ProjectsRegistry";
 
 function App() {
 
   return (
-    <div>
+    <div className="container">
       <Router>
         <Nav />
         <Switch>

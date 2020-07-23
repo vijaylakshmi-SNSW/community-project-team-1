@@ -1,5 +1,12 @@
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1224px;
+}
+
 .App {
     text-align: center;
+    border: black solid 2px;
 }
 
 nav {
@@ -11,9 +18,45 @@ nav {
 }
 
 .nav-links {
-  width: 40%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 20px;
+}
+
+.global-header__logo-lock-up span {
+    flex-shrink: 0;
+    display: block;
+    height: 46px;
+    width: 1px;
+    background: #dee3e5;
+    margin: 0 13px;
+}
+
+.global-header__logo-lock-up {
+    display: flex;
+    margin: 0 auto;
+    flex-shrink: 0;
+    background: none!important;
+    padding: 0!important;
+    text-decoration: none;
+    align-items: flex-end;
+}
+
+.nav-links a {
+    text-decoration: none;
+}
+
+.nav-links li {
+    margin-right: 50px;
+}
+
+.projects-submit-registry-form{
+    display: inline-grid;
+    place-items: baseline;
+    padding-left: 20px;
+}
+
+.projects-submit-registry-form button{
+    margin-top: 8px;
 }
