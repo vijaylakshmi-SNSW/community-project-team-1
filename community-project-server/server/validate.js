@@ -1,7 +1,15 @@
 module.exports = {
 
     validateGivenName: function (givenName) {
-        if (givenName.length < 1 || givenName.length > 50) {
+        if (givenName.length == 0 || givenName.length > 50) {
+            return false;
+        }
+
+        return true;
+    },
+
+    validateLastName: function (lastName) {
+        if (lastName.length == 0 || lastName.length > 50) {
             return false;
         }
 
