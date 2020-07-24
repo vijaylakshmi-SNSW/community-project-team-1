@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const storage = require('node-persist');
-// const projects = require('../projects.json');
 const server = express();
 server.use(express.json());
 server.use(bodyParser.json());
@@ -17,14 +16,14 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
     await storage.init({ dir: "./data" });
 
     //display all the projects available in data
-    //http://localhost:3000/api/projects
+    //http://localhost:4000/api/projects
     server.get("/api/projects/admin", async (req, res) => {
         res.json(await storage.valuesWithKeyMatch(/project-/));
     });
 
 
     //submit a project and return a message 
-    //http://localhost:3000/api/projects/submit
+    //http://localhost:4000/api/projects/submit
     server.post("/api/projects/submit", async (req, res) => {
         let data = req.body;
         let givenName = req.body.givenName;
