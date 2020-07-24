@@ -59,7 +59,7 @@ export default function ProjectsSubmitRegistry(props) {
                 <label>Title of Project:</label>
                 <input placeholder="Enter Title here" onChange={e=>setTitle(e.target.value)} value={title}></input>
                 <label>Description of Project:</label>
-                <input placeholder="Enter Description here" onChange={e => setDescription(e.target.value)} value={description}></input>
+                <textarea rows = '15' cols = '40' maxlength = '500' placeholder="Enter Description here (max 500 characters)" onChange={e => setDescription(e.target.value)} value={description}></textarea>
                 <button onClick={handleSubmitButton}>Submit</button>
                 <div>{projectSubmittReceived && (<p>Thank you very much for your submission!</p>)} {projectSubmittNotReceived && (<p>Please try again later.</p>)}</div>
             </form>
