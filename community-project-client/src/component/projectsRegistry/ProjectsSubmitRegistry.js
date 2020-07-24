@@ -38,8 +38,11 @@ export default function ProjectsSubmitRegistry(props) {
                     setTitle("");
                     setDescription("");
                     setProjectSubmittReceived(true);
+                    setProjectSubmittNotReceived(false);
                 } else {
                     setProjectSubmittNotReceived(true);
+                    setProjectSubmittReceived(false);
+
                 }
             });
     }
