@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const storage = require('node-persist');
-const projects = require('../projects.json');
+// const projects = require('../projects.json');
 const server = express();
 server.use(express.json());
 server.use(bodyParser.json());
 server.use(cors());
-const port = 3000;
-const { validateGivenName, validatePostcode, validateDescription } = require('./validate');
+const port = 4000;
+const { validateGivenName, validatePostcode, validateDescription, validateLastName, validateStatus } = require('./validate');
 
 
 
@@ -34,21 +34,21 @@ const { validateGivenName, validatePostcode, validateDescription } = require('./
         let errors = [];
         if (!validatePostcode(postcode)) {
             res.status(400);
-            errors.push("incorrect postcode" );
+            errors.push("incorrect postcode");
         }
         if (!validateGivenName(givenName)) {
             res.status(400);
-            errors.push("Given name can only have 50 charecters" );
+            errors.push("Given name can only have 50 charecters");
             //res.json({ status: 500, error: "Given name can only have 50 charecters" });
         }
         if (!validateLastName(lastName)) {
             res.status(400);
-            errors.push("Last name can only have 50 charecters" );
+            errors.push("Last name can only have 50 charecters");
         }
 
         if (!validateDescription(description)) {
             res.status(400);
-            errors.push("Description should not exceed 300 charecters" );
+            errors.push("Description should not exceed 300 charecters");
         }
         if (errors.length == 0) {
             let project = {
@@ -61,34 +61,43 @@ const { validateGivenName, validatePostcode, validateDescription } = require('./
             await storage.setItem(`project-${project.id}`, project);
             res.json({ status: 200, msg: "Thank you for your submission, we will treat it as Revenue NSW would." });
         } else {
-            res.json({error: errors})
+            res.json({ error: errors })
         }
 
     });
 
 
-    //Display only the eligible projects for Public 
-    //http://localhost:3000/api/projects
-    server.get("/api/projects", async (req, res) => {
-        let allProjects = await storage.valuesWithKeyMatch(/project-/);
-        let result = allProjects.filter(p => p.status == true);
-        res.json(result);
-    });
-
     //Display only the pending projects for administrator
-    //http://localhost:3000/api/projects/pending      
-    server.get("/api/projects/pending", async (req, res) => {
+    //http://localhost:3000/api/projects/{status}      
+    server.get("/api/projects/{status}", async (req, res) => {
+        let status = req.params.status;
+        if (!validateStatus(status)) {
+            res.status(400);
+            res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
+        } else {
         let allProjects = await storage.valuesWithKeyMatch(/project-/);
-        let result = allProjects.filter(p => p.status == "pending");
-        res.json(result);
+        let result = allProjects.filter(p => p.status === status);
+        res.json({data:result, status: 200} );
+        } 
     });
 
-    //Display only the declined projects for administrator
-    //http://localhost:3000/api/projects/declined      
-    server.get("/api/projects/declined", async (req, res) => {
-        let allProjects = await storage.valuesWithKeyMatch(/project-/);
-        let result = allProjects.filter(p => p.status == false);
-        res.json(result);
+    // //put method to update the status for admin
+    // //http://localhost:3000/api/projects/status/update
+    server.put('/api/projects/status/update', async (req, res) => {
+        let id = req.body.id;
+        let status = req.body.status;
+        if (!validateStatus(status)) {
+            res.status(400);
+            res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
+        } else {
+            let foundObject = await storage.getItem(`project-${id}`);
+            let key = `project-${id}`
+            foundObject.status = status;
+            let result = await storage.updateItem(key, foundObject)
+            res.json({ data: result.content, status: 200 })
+
+        }
+
     });
 
 

@@ -28,5 +28,12 @@ module.exports = {
             return false;
         }
         return true;
+    },
+
+    validateStatus: function (status){
+        if(status != 'pending' || status != 'declined' || status != 'approved'){
+            return false;
+        }
+        return true;
     }
 }
