@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function ProjectsSubmitRegistry(props) {
 
     const [givenName, setGivenName] = useState("");
-    const [surname, setSurname] = useState("");
+    const [lastName, setLastName] = useState("");
     const [postcode, setPostcode] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -15,7 +15,7 @@ export default function ProjectsSubmitRegistry(props) {
 
         let project = {
             givenName: givenName,
-            surname: surname,
+            lastName: lastName,
             postcode: postcode,
             title: title,
             description: description
@@ -33,7 +33,7 @@ export default function ProjectsSubmitRegistry(props) {
                 if (json.status === 200) {
                     props.submitProject(json.project);
                     setGivenName("");
-                    setSurname("");
+                    setLastName("");
                     setPostcode("");
                     setTitle("");
                     setDescription("");
@@ -48,9 +48,9 @@ export default function ProjectsSubmitRegistry(props) {
         <div>
             <form className="projects-submit-registry-form">
                 <label>Given Name/s:</label>
-                <input placeholder="Enter Given Name here" onChange={e => setGivenName(e.target.value)} value={givenName} required></input>
+                <input placeholder="Enter Given Name here" onChange={e => setGivenName(e.target.value)} value={givenName}></input>
                 <label>Surname:</label>
-                <input placeholder="Enter Surname here" onChange={e => setSurname(e.target.value)} value={surname}></input>
+                <input placeholder="Enter Surname here" onChange={e => setLastName(e.target.value)} value={lastName}></input>
                 <label>Postcode:</label>
                 <input placeholder="Enter Postcode here" onChange={e => setPostcode(e.target.value)} value={postcode}></input>
                 <label>Title of Project:</label>

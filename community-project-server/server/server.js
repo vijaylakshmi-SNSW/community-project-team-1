@@ -3,12 +3,11 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const storage = require('node-persist');
-const projects = require('../projects.json');
 const server = express();
 server.use(express.json());
 server.use(bodyParser.json());
 server.use(cors());
-const port = 3000;
+const port = 4000;
 const { validateGivenName, validatePostcode, validateDescription } = require('./validate');
 
 
@@ -17,14 +16,14 @@ const { validateGivenName, validatePostcode, validateDescription } = require('./
     await storage.init({ dir: "./data" });
 
     //display all the projects available in data
-    //http://localhost:3000/api/projects
+    //http://localhost:4000/api/projects
     server.get("/api/projects/admin", async (req, res) => {
         res.json(await storage.valuesWithKeyMatch(/project-/));
     });
 
 
     //submit a project and return a message 
-    //http://localhost:3000/api/projects/submit
+    //http://localhost:4000/api/projects/submit
     server.post("/api/projects/submit", async (req, res) => {
         let data = req.body;
         let givenName = req.body.givenName;
@@ -68,7 +67,7 @@ const { validateGivenName, validatePostcode, validateDescription } = require('./
 
 
     //Display only the eligible projects for Public 
-    //http://localhost:3000/api/projects
+    //http://localhost:4000/api/projects
     server.get("/api/projects", async (req, res) => {
         let allProjects = await storage.valuesWithKeyMatch(/project-/);
         let result = allProjects.filter(p => p.status == true);
@@ -76,7 +75,7 @@ const { validateGivenName, validatePostcode, validateDescription } = require('./
     });
 
     //Display only the pending projects for administrator
-    //http://localhost:3000/api/projects/pending      
+    //http://localhost:4000/api/projects/pending      
     server.get("/api/projects/pending", async (req, res) => {
         let allProjects = await storage.valuesWithKeyMatch(/project-/);
         let result = allProjects.filter(p => p.status == "pending");
@@ -84,7 +83,7 @@ const { validateGivenName, validatePostcode, validateDescription } = require('./
     });
 
     //Display only the declined projects for administrator
-    //http://localhost:3000/api/projects/declined      
+    //http://localhost:4000/api/projects/declined      
     server.get("/api/projects/declined", async (req, res) => {
         let allProjects = await storage.valuesWithKeyMatch(/project-/);
         let result = allProjects.filter(p => p.status == false);
