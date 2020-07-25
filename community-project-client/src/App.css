@@ -61,6 +61,10 @@ nav {
     margin-top: 8px;
 }
 
+.viewprojects-eligible{
+    padding-left: 20px;
+}
+
 .vote-button, .vote-button:focus{
     background-color: white;
     border: none;

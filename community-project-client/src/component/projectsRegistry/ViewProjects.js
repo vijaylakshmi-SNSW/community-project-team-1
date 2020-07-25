@@ -17,7 +17,7 @@ export default function ViewProjects() {
 
 
     return (
-        <div>
+        <div className="viewprojects-eligible">
             <div className="viewall-container">
                 <div className="eligible-projects-image">
                     <img src="https://www.nsw.gov.au/sites/default/files/styles/content_x1/public/2020-02/My-Community-Project-Eligible-Projects-DataCard-Banner-v04.png?itok=TUeWyMMC"></img>
