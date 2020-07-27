@@ -61,7 +61,7 @@ export default function ProjectsSubmitRegistry(props) {
                 } else {
                     setDescriptionEmpty(false);
                 }
-                if (postcode.charAt(0) === !(2) && postcodeEmpty === false) {
+                if (postcode.charAt(0) !== ("2")) {
                     setPostcodeDoesNotStartWith2(true);
                 } else {
                     setPostcodeDoesNotStartWith2(false);
@@ -76,8 +76,8 @@ export default function ProjectsSubmitRegistry(props) {
                     setDescription("");
                     setProjectSubmittReceived(true);
                     setProjectSubmittNotReceived(false);
-                }
-                if (setGivenNameEmpty() === false && setlastNameEmpty() === false && setPostcodeEmpty() === false && setTitleEmpty() === false && setDescriptionEmpty() === false && setPostcodeDoesNotStartWith2() === false && json.status !== 200) {
+                } 
+                if (json.status === 400) {
                     setProjectSubmittNotReceived(true);
                     setProjectSubmittReceived(false);
                 }
@@ -88,24 +88,25 @@ export default function ProjectsSubmitRegistry(props) {
         <div>
             <form className="projects-submit-registry-form">
                 <label><h1>Submit a Project</h1></label>
+                <p style={{paddingBottom:"8px"}}>The * indicates a mandatory field</p>
                 <label>* Given Name/s</label>
                 <input className="project-submit-input" placeholder="Enter Given Name here" maxLength="50" onChange={e => setGivenName(e.target.value)} value={givenName}></input>
-                <div>{givenNameEmpty && (<p style={{color: "red"}}><b>Given name/s required</b></p>)}</div>
+                <div className="error-messages">{givenNameEmpty && (<p style={{ color: "red" }}><b>Given name/s required</b></p>)}</div>
                 <label>* Surname</label>
                 <input className="project-submit-input" placeholder="Enter Surname here" maxLength="50" onChange={e => setLastName(e.target.value)} value={lastName}></input>
-                <div>{lastNameEmpty && (<p style={{color: "red"}}><b>Surname name required</b></p>)}</div>
+                <div className="error-messages">{lastNameEmpty && (<p style={{ color: "red" }}><b>Surname name required</b></p>)}</div>
                 <label>* Postcode</label>
                 <input className="project-submit-input" placeholder="Enter Postcode here" maxLength="4" onChange={e => setPostcode(e.target.value)} value={postcode}></input>
-                <div>{postcodeEmpty && (<p style={{color: "red"}}><b>Postcode required</b></p>)}</div>
-                <div>{postcodeDoesNotStartWith2 && (<p style={{color: "red"}}>Postcode starting with the number "2" required</p>)}</div>
+                <div className="error-messages">{postcodeEmpty && (<p style={{ color: "red" }}><b>Postcode required</b></p>)}</div>
+                <div className="error-messages">{postcodeDoesNotStartWith2 && (<p style={{ color: "red" }}><b>Postcode starting with the number "2" required</b></p>)}</div>
                 <label>* Title of Project</label>
                 <input className="project-submit-input" placeholder="Enter Title here" onChange={e => setTitle(e.target.value)} value={title}></input>
-                <div>{titleEmpty && (<p style={{color: "red"}}><b>Title required</b></p>)}</div>
+                <div className="error-messages">{titleEmpty && (<p style={{ color: "red" }}><b>Title required</b></p>)}</div>
                 <label>* Description of Project</label>
                 <textarea className="project-submit-input-description" maxLength='500' placeholder="Enter Description here (max 500 characters)" onChange={e => setDescription(e.target.value)} value={description}></textarea>
-                <div>{descriptionEmpty && (<p style={{color: "red"}}><b>Description required</b></p>)}</div>
-                <button  className="project-submit-button" onClick={handleSubmitButton}>Submit Project</button>
-                <div>{projectSubmittReceived && (<p>Thank you very much for your submission!</p>)} {projectSubmittNotReceived && (<p>Please try again later</p>)}</div>
+                <div className="error-messages">{descriptionEmpty && (<p style={{ color: "red" }}><b>Description required</b></p>)}</div>
+                <button className="project-submit-button" onClick={handleSubmitButton}>Submit Project</button>
+                <div className="error-messages">{projectSubmittReceived && (<p>Thank you very much for your submission!</p>)} {projectSubmittNotReceived && (<p>Please try again later</p>)}</div>
             </form>
         </div>
     );
