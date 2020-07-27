@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ProjectsSubmitRegistry from "./ProjectsSubmitRegistry";
-import ViewProjects from "./ViewProjects";
 
 export default function ProjectsRegistry() {
 
     const [projects, setProjects] = useState([]);
 
     useEffect(()=>{
-        fetch("http://localhost:4000/api/projects")
+        fetch("http://localhost:4000/api/projects/admin")
         .then(res=>res.json())
         .then(projects=>setProjects(projects));
     },[]);
@@ -24,7 +23,6 @@ export default function ProjectsRegistry() {
         <div>
             <div>
                 <ProjectsSubmitRegistry submitProject={submitProject} />
-                <ViewProjects  />
             </div>
         </div>
     );

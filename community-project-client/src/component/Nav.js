@@ -8,7 +8,7 @@ export default function Nav() {
     return (
         <div>
             <ul className="nav-links">
-                <Link to="/home">
+                <Link to="/">
                     <li><a className="global-header__logo-lock-up" href="/">
                         <svg width="46" height="49" viewBox="0 0 46 49" xmlns="http://www.w3.org/2000/svg" className="global-header__nsw-gov-logo">
                             <title>NSW Government</title>
@@ -31,7 +31,7 @@ export default function Nav() {
                         </svg>
                     </a></li>
                 </Link>
-                <Link to="/home">
+                <Link to="/">
                     <li>Home</li>
                 </Link>
                 <Link to="/project-registry-submit">

@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Nav />
         <Switch>
-          <Route path="/home" component={Home} />
+          <Route path="/" exact component={Home} />
           <Route path="/project-registry-submit" component={ProjectsRegistry} />
           <Route path="/view-all" component={ViewAll} />
           <Route path="/admin" component={Admin} />
