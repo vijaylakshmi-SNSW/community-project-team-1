@@ -5,6 +5,7 @@ import Home from "./component/Home";
 import Nav from "./component/Nav";
 import ViewAll from "./component/projectsRegistry/ViewProjects";
 import ProjectsRegistry from "./component/projectsRegistry/ProjectsRegistry";
+import Admin from "./component/Admin";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/project-registry-submit" component={ProjectsRegistry} />
           <Route path="/view-all" component={ViewAll} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </Router>
     </div>
