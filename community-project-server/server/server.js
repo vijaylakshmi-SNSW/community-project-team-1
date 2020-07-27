@@ -17,7 +17,7 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
 
     //display all the projects available in data
     //http://localhost:4000/api/projects
-    server.get("/api/projects/admin", async (req, res) => {
+    server.get("/api/projects", async (req, res) => {
         res.json(await storage.valuesWithKeyMatch(/project-/));
     });
 
@@ -65,19 +65,25 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
 
     });
 
+    //fetch(`http://localhost:4000/api/projects/${status}`, {
 
     //Display only the pending projects for administrator
     //http://localhost:3000/api/projects/{status}      
-    server.get("/api/projects/{status}", async (req, res) => {
+    server.get('/api/projects/:status', async (req, res) => {
         let status = req.params.status;
-        if (!validateStatus(status)) {
+        if (validateStatus(status)) {
             res.status(400);
             res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
         } else {
-        let allProjects = await storage.valuesWithKeyMatch(/project-/);
-        let result = allProjects.filter(p => p.status === status);
-        res.json({data:result, status: 200} );
-        } 
+            try{
+            let allProjects = await storage.valuesWithKeyMatch(/project-/);
+            let result = allProjects.filter(p => p.status === status);
+            res.status(200);
+            res.json({ data: result});
+            } catch (error) {
+                res.json({ status: 400, message: error.message });
+            }
+        }
     });
 
     // //put method to update the status for admin
@@ -85,16 +91,19 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
     server.put('/api/projects/status/update', async (req, res) => {
         let id = req.body.id;
         let status = req.body.status;
-        if (!validateStatus(status)) {
+        if (validateStatus(status)) {
             res.status(400);
             res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
+
         } else {
+           
             let foundObject = await storage.getItem(`project-${id}`);
             let key = `project-${id}`
             foundObject.status = status;
             let result = await storage.updateItem(key, foundObject)
             res.json({ data: result.content, status: 200 })
 
+            
         }
 
     });
