@@ -6,9 +6,10 @@ export default function ViewProjects() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/projects/admin")
+        
+        fetch("http://localhost:4000/api/projects/approved")
             .then(res => res.json())
-            .then(projects => setProjects(projects));
+            .then(projects => setProjects(projects.data));
     }, []);
 
     function handleVoteClick() {
@@ -29,14 +30,13 @@ export default function ViewProjects() {
 
             {projects.map(p =>
                 <div >
-                    {p.status === "approved" &&
                         <div style={{ padding: "5px", margin: "5px", border: "1px solid grey" }}>
                             <p><strong>{p.title}</strong></p>
                             <p>{p.description}</p>
                             <div style={{align: "right"}}>
                                 <button class="vote-button" onClick={handleVoteClick}>Vote for this project</button>
                             </div>
-                        </div>}
+                        </div>
                 </div>)}
         </div>
     );
