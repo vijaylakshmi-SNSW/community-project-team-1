@@ -40,6 +40,9 @@ export default function Nav() {
                 <Link to="/view-all">
                     <li>View All</li>
                 </Link>
+                <Link to="/top-voted">
+                    <li>Top Voted</li>
+                </Link>
                 <Link to="/admin">
                     <li>Admin</li>
                 </Link>
