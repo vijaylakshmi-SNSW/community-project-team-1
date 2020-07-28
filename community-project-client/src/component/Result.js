@@ -1,73 +1,51 @@
 import React, { useState, useEffect } from "react";
 import '../App.css';
 
-// const [status, setStatus] = useState('');
-//const [resultObj, setResultObj] = useState(undefined);
-
 export default function Result(props) {
-    const [answer, setAnswer] = useState(undefined);
+    
+    const [updatedProject, setUpdatedProject] = useState();
 
-    let result = props.display;
-
-    function sendUserRequest(e, result) {
-        // debugger;
+    function setUpdateProjectStatusRequest(e) {
         e.preventDefault();
-        let status = e.target.value;
-        let id = result.id;
-        let s = { status, id }
         fetch("http://localhost:4000/api/projects/status/update", {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(s)
+            body: JSON.stringify({status: e.target.value,id:props.project.id})
         })
             .then((response) => response.json())
-            .then(json => setAnswer(json.data))
-
+            .then(json => {
+                setUpdatedProject(json.data);
+                props.updateMessage.setShowUpdateMessage(true); 
+            })
     }
-    useEffect(() => {
-
-        fetch('/api/projects')
-          .then(response => response.json())
-          .then(data => setAnswer(data));
-      }, []);
     
-
-
-
-
     return (
-        <div style={{ 'border': '2px', 'borderStyle': 'groove' }}>
-            <br />
-       <strong>Name:</strong>  {result.givenName}  {result.lastName}
-            <br />
-        <strong>Title:</strong> {result.title}
-            <br />
-        <strong>Description:</strong>{result.description}
-            <br />
-         <strong>Status:</strong>{result.status}
-
+        <div style={{border:'2px',borderStyle:'groove',padding:'10px',margin:'3.5px'}}>
+            <div>
             {
-                (result.status === 'pending' &&
-
+                props.updateMessage.showUpdateMessage && updatedProject && 
+                <p style={{textAlign:'center',padding:'10px',backgroundColor:updatedProject.value.status == 'approved' ? '#b3ffb3' : 'red',color:'#003300'}}>
+                    The project has been {updatedProject.value.status}
+                </p>
+            }
+            </div>
+            <strong>Name: </strong>{props.project.givenName}  {props.project.lastName}
+            <br />
+            <strong>Title: </strong>{props.project.title}
+            <br />
+            <strong>Description: </strong>{props.project.description}
+            <br />
+            <strong>Status: </strong>{updatedProject ? updatedProject.value.status : props.project.status}
+            {
+                (props.project.status === 'pending' && !updatedProject  &&
                     <div>
                         <br />
-                        <button class="approve-button" onClick={(event) => sendUserRequest(event, result)} value="approved">Approve</button>
-
-
-                        <button class="reject-button" onClick={(event) => sendUserRequest(event, result)} value="rejected">Reject</button>
+                        <button className="approve-button" onClick={setUpdateProjectStatusRequest} value="approved">Approve</button>
+                        <button className="reject-button" onClick={setUpdateProjectStatusRequest} value="rejected">Reject</button>
                         <br />
                     </div>
                 )
-
             }
-
-            <div>
-
-                {answer && <p>The project has been {answer.value.status}</p>}
-
-            </div>
-            <br />
-            <br />
         </div>
     )
 }
