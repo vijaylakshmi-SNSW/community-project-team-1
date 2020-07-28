@@ -54,6 +54,7 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
                 id: uuidv4(),
                 ...data,
                 status: 'pending',
+                voteCount: 0,
                 submissionDate: new Date().toISOString().slice(0, 10)
             }
 

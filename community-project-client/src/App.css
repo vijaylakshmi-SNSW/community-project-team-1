@@ -51,6 +51,22 @@ nav {
     margin-right: 50px;
 }
 
+.top-voted-title {
+    padding-left: 20px;
+}
+
+.top-voted-projects-list li {
+    width: 800px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #646974;
+    border-radius: 7px;
+}
+
+.top-voted-projects-list ul {
+    padding-inline-start: 20px;
+}
+
 .projects-submit-registry-form {
     display: inline-grid;
     place-items: baseline;
@@ -123,8 +139,6 @@ nav {
     background-color: red;
     color: white;
   }
-
-  
 
 .project-submit-input {
     height: 50px;
