@@ -5,6 +5,7 @@ export default function ViewProjects() {
 
     const [projects, setProjects] = useState([]);
     const [updateVoteCount, setUpdateVoteCount] = useState(0);
+    const [showVoteButton, setShowVoteButton] = useState(true);
 
     useEffect(() => {
         fetch("http://localhost:4000/api/projects/approved")
@@ -19,6 +20,7 @@ export default function ViewProjects() {
     function handleVoteClick(id, e) {
         debugger;
         e.preventDefault();
+        setShowVoteButton(false);
 
         fetch("http://localhost:4000/api/projects/vote", {
 
@@ -52,7 +54,7 @@ export default function ViewProjects() {
                             <p><strong>{p.title}</strong></p>
                             <p>{p.description}</p>
                             <div style={{ align: "right" }}>
-                                <button className="vote-button" onClick={(e) => handleVoteClick(p.id, e)}>Vote for this project</button>
+                                <button className="vote-button" style={{ display: showVoteButton ? 'inline' : 'none' }} onClick={(e) => handleVoteClick(p.id, e)}>Vote for this project</button>
                                
                             </div>
                         </div>
