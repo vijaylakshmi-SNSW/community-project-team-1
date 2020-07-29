@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Projects from './Projects';
+import Pagination from '../Pagination';
 
 export default function ViewProjects() {
 
@@ -7,32 +9,25 @@ export default function ViewProjects() {
     const [updateVoteCount, setUpdateVoteCount] = useState(0);
     const [showVoteButton, setShowVoteButton] = useState(true);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [projectsPerPage] = useState(5);
+
     useEffect(() => {
         fetch("http://localhost:4000/api/projects/approved")
             .then(res => res.json())
             .then(projects => {
-                setUpdateVoteCount(0) ;
+                setUpdateVoteCount(0);
                 setProjects(projects.data)
             })
     }, []);
 
+    // get current projects - pagination
+    const indexOfLastProject = currentPage * projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
 
-    function handleVoteClick(id, e) {
-        
-        e.preventDefault();
-        setShowVoteButton(false);
-        fetch("http://localhost:4000/api/projects/vote", {
-
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: id })
-        })
-            .then((response) => response.json())
-            .then(json => {
-                setUpdateVoteCount(json.data.content.value.voteCount)
-            })
-
-    }
+    // change page - pagination
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
         <div className="viewprojects-eligible">
@@ -41,27 +36,11 @@ export default function ViewProjects() {
                     <img src="https://www.nsw.gov.au/sites/default/files/styles/content_x1/public/2020-02/My-Community-Project-Eligible-Projects-DataCard-Banner-v04.png?itok=TUeWyMMC" alt="Community Project"></img>
                 </div>
             </div>
-            <h1>Community Project</h1>
+            <h1>Projects</h1>
             <p>Browse the projects that have been approved for consideration.</p>
             <p>New project submissions are still being accepted. </p>
-            
-            {projects.map(p =>
-                <ul >
-                    <li style={{ listStyle: "none" }}>
-                        <div style={{ padding: "5px", margin: "5px", border: "1px solid grey" }} key={p.id}>
-                            <p><strong>{p.title}</strong></p>
-                            <p>{p.description}</p>
-                            <div style={{ align: "right" }}>
-                                <button className="vote-button" style={{ display: showVoteButton ? 'inline' : 'none' }} onClick={(e) => handleVoteClick(p.id, e)}>Vote for this project</button>
-                               
-                            </div>
-                        </div>
-                    </li>
-                </ul>)}
-
-                {updateVoteCount > 0 && alert ("Thanks for your vote")}
-
-
+            <Projects projects={currentProjects} updateVoteCount={updateVoteCount} showVoteButton={showVoteButton} />
+            <Pagination projectsPerPage={projectsPerPage} totalPosts={projects.length} paginate={paginate} />
         </div>
 
 

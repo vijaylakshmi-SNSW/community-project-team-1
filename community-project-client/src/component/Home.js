@@ -22,17 +22,21 @@ export default function Home() {
                 </div>
                 <p></p>
 
-                <p>Here are a few projects that have been submitted:</p>
+                <p>Here are a few projects that have been approved for funding:</p>
                 <div className='row'>
                     <div className='column' style={{ border: '2px solid grey' }}>
                         <b>Camden Water Park</b>
                     <br />
                         <img src="https://www.camden.nsw.gov.au/assets/images/Major-Developments/Major-Council-Projects/Curry-Reserve-Water-Play-Park/CR-2.jpg" alt="waterpark camden" height='100px'></img>
+                    <img src="https://www.conlonfinancialsolutions.com.au/wp-content/uploads/2017/02/approved-stamp-clipart-best-Wyi7ys-clipart.jpeg" alt="approved" height='100px'></img>
                     <p>Create a water play park for the children of the community and its surrounding suburbs.</p>
                     </div>
                     <div className='column' style={{ border: '2px solid grey' }}>
                         <b>Mapping the Inner-West–Australia’s capital of craft brewing</b>
+                        <br />
                         <img src="https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/markets/brewing-up-a-storm-in-india-s-craft-beer-wilderness/10309889-3-eng-GB/Brewing-up-a-storm-in-India-s-craft-beer-wilderness_wrbm_large.jpg" alt='beer' height='100px'></img>
+                        <img src="https://www.conlonfinancialsolutions.com.au/wp-content/uploads/2017/02/approved-stamp-clipart-best-Wyi7ys-clipart.jpeg" alt="approved" height='100px'></img>
+                    
                     <p>An illustrated map and guide that locates and celebrates the craft breweries in the Inner-West (illustration, large mural, brochure, website).</p>
                     </div>
                 </div>
