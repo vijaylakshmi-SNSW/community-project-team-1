@@ -84,7 +84,7 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
     //http://localhost:3000/api/projects/{status}      
     server.get('/api/projects/:status', async (req, res) => {
         let status = req.params.status;
-        if (validateStatus(status)) {
+        if (!validateStatus(status)) {
             res.status(400);
             res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
         } else {
@@ -104,7 +104,7 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
     server.put('/api/projects/status/update', async (req, res) => {
         let id = req.body.id;
         let status = req.body.status;
-        if (validateStatus(status)) {
+        if (!validateStatus(status)) {
             res.status(400);
             res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
 
@@ -115,13 +115,11 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
             foundObject.status = status;
             let result = await storage.updateItem(key, foundObject)
             res.json({ data: result.content, status: 200 })
-
-
         }
 
     });
 
-    //// //http://localhost:3000/api/projects/vote
+    //// //http://localhost:4000/api/projects/vote
     server.put('/api/projects/vote', async(req,res)=> {
         let id = req.body.id;
         let foundObject = await storage.getItem(`project-${id}`);

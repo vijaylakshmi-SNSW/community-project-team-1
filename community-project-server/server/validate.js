@@ -38,7 +38,7 @@ module.exports = {
     },
 
     validateStatus: function (status){
-        if(status == 'pending' && status == 'rejected' && status == 'approved'){
+        if(status == 'pending' || status == 'rejected' || status == 'approved'){
             return true;
         }
         return false;
