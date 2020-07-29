@@ -15,7 +15,7 @@ export default function Home() {
                 </p>
                 <p>Each project submission will be reviewed for eligibility, then compete alongside other eligible projects for funding.
                 </p>
-                <p>If you would like to submit a project for consideration, click <a href='./submit'>here</a>.</p>
+                <p>If you would like to submit a project for consideration, click <a href='./project-registry-submit'>here</a>.</p>
                 <p></p>
                 <div className="eligible-projects-image" style={{ padding: '20px', textAlign:'center' }}>
                     <img src="https://www.nsw.gov.au/sites/default/files/styles/content_x1/public/2020-02/My-Community-Project-Eligible-Projects-DataCard-Banner-v04.png?itok=TUeWyMMC" alt="Community Project"></img>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import '../App.css';
 
 export default function Result(props) {
@@ -24,7 +24,7 @@ export default function Result(props) {
             <div>
             {
                 props.updateMessage.showUpdateMessage && updatedProject && 
-                <p style={{textAlign:'center',padding:'10px',backgroundColor:updatedProject.value.status == 'approved' ? '#b3ffb3' : '#ffb3b3',color:'#003300'}}>
+                <p style={{textAlign:'center',padding:'10px',backgroundColor:updatedProject.value.status === 'approved' ? '#b3ffb3' : '#ffb3b3',color:'#003300'}}>
                     The project has been {updatedProject.value.status}
                 </p>
             }

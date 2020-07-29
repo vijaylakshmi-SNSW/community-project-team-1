@@ -84,16 +84,11 @@ export default function ProjectsSubmitRegistry(props) {
             });
     }
 
-    const errorBox = (condition) => {
-        if(!condition) {
-            
-        }
-    }
-
     return (
         <div>
             <form className="projects-submit-registry-form">
                 <label><h1>Submit a Project</h1></label>
+                {projectSubmittReceived && (<p>Thank you very much for your submission!</p>)}
                 <p style={{paddingBottom:"8px"}}>The * indicates a mandatory field</p>
                 <label>* Given Name/s</label>
                 <input className="project-submit-input" placeholder="Enter Given Name here" minLength="1" maxLength="50" onChange={e => setGivenName(e.target.value)} value={givenName}></input>
@@ -112,7 +107,7 @@ export default function ProjectsSubmitRegistry(props) {
                 <textarea className="project-submit-input-description" maxLength='500' minLength="1" placeholder="Enter Description here (max 500 characters)" onChange={e => setDescription(e.target.value)} value={description}></textarea>
                 <div className="error-messages">{descriptionEmpty && (<p style={{ color: "red" }}><b>Description required</b></p>)}</div>
                 <button className="project-submit-button" onClick={handleSubmitButton}>Submit Project</button>
-                <div className="error-messages">{projectSubmittReceived && (<p>Thank you very much for your submission!</p>)} {projectSubmittNotReceived && (<p>Please try again later</p>)}</div>
+                <div className="error-messages"> {projectSubmittNotReceived && (<p>Please try again later</p>)}</div>
             </form>
         </div>
     );
