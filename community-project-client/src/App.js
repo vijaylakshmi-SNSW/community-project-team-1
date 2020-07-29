@@ -7,6 +7,7 @@ import ViewAll from "./component/projectsRegistry/ViewProjects";
 import ProjectsRegistry from "./component/projectsRegistry/ProjectsRegistry";
 import Admin from "./component/Admin";
 import TopVoted from "./component/TopVoted";
+import Footer from "./component/Footer";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/top-voted" component={TopVoted} />
           <Route path="/admin" component={Admin} />
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

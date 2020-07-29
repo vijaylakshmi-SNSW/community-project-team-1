@@ -214,3 +214,13 @@ nav {
     font-family: "Gotham A","Gotham B",Helvetica,Arial,Sans-Serif;
     font-weight: 500;
 }
+
+.footer {
+    padding: 20px;
+    background-color:gray;
+    color: white;
+}
+
+.footer-list{
+    list-style: none;
+}
