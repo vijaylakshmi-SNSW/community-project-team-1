@@ -8,7 +8,7 @@ server.use(express.json());
 server.use(bodyParser.json());
 server.use(cors());
 const port = 4000;
-const { validateGivenName, validatePostcode, validateDescription, validateLastName, validateStatus } = require('./validate');
+const { validateGivenName, validatePostcode, validateDescription, validateLastName, validateStatus, validateTitle } = require('./validate');
 
 
 
@@ -126,7 +126,7 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
         let id = req.body.id;
         let foundObject = await storage.getItem(`project-${id}`);
             let key = `project-${id}`
-            foundObject.vote = foundObject.vote + 1;
+            foundObject.voteCount = foundObject.voteCount + 1;
             let result = await storage.updateItem(key, foundObject)
             res.json({data: result, status: 200})
     })

@@ -30,8 +30,8 @@ module.exports = {
         return true;
     },
 
-    validateTitle: function (status){
-        if(this.validateTitle.length > 101){
+    validateTitle: function (title){
+        if(title.length > 101){
             return true;
         }
         return false;
