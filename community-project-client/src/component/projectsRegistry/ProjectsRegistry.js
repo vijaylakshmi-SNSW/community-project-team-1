@@ -6,7 +6,7 @@ export default function ProjectsRegistry() {
     const [projects, setProjects] = useState([]);
 
     useEffect(()=>{
-        fetch("http://localhost:4000/api/projects/admin")
+        fetch("http://localhost:4000/api/projects")
         .then(res=>res.json())
         .then(projects=>setProjects(projects));
     },[]);

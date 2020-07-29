@@ -30,10 +30,21 @@ module.exports = {
         return true;
     },
 
+    validateTitle: function (status){
+        if(this.validateTitle.length > 101){
+            return true;
+        }
+        return false;
+    },
+
     validateStatus: function (status){
         if(status == 'pending' && status == 'rejected' && status == 'approved'){
             return true;
         }
         return false;
     }
+
+    
+
+
 }

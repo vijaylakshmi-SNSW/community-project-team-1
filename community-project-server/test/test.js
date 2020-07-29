@@ -200,12 +200,29 @@ describe('tasks Community Project API', () => {
                         response.body.should.have.property('error');
                         done();
                     });
-            });
-
+            });     
 
         });
 
+        describe("PUT /api/projects/vote", () => {
+            it("it should return voteCount + 1", (done) => {
+                let data = { 'id': 'c4aa8b0f-b2e3-40c5-b6fe-cbe3cf42fe77' }
+                chai.request(server)
+                .get('/api/projects/:id')
+                .end(err,response)
+                let voteValue = response.vote
+                chai.request(server)
+                .put('/api/projects/vote')
+                .send(data)
+                .end((err, response) => {  //expectation
+                    response.should.have.status(200);
+                    response.body.should.have.property('voteCount');
+                    done();
+                });
+            });
 
 
     });
+
+});
 

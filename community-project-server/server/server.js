@@ -21,6 +21,10 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
         res.json(await storage.valuesWithKeyMatch(/project-/));
     });
 
+    server.get("/api/projects/id/:id", async (req, res)=> {
+        let id = req.params.id;
+        res.json(await storage.getItem(`project-${id}`)) 
+    });
 
     //submit a project and return a message 
     //http://localhost:4000/api/projects/submit
@@ -30,6 +34,8 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
         let lastName = req.body.lastName;
         let postcode = req.body.postcode;
         let description = req.body.description;
+        let title = req.body.title;
+        
         let errors = [];
         if (!validatePostcode(postcode)) {
             res.status(400);
@@ -49,6 +55,12 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
             res.status(400);
             errors.push("Description should not exceed 300 charecters");
         }
+
+        if (!validateTitle(title)) {
+            res.status(400);
+            errors.push("Title should not exceed 100 charecters");
+        }
+
         if (errors.length == 0) {
             let project = {
                 id: uuidv4(),
@@ -76,11 +88,11 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
             res.status(400);
             res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
         } else {
-            try{
-            let allProjects = await storage.valuesWithKeyMatch(/project-/);
-            let result = allProjects.filter(p => p.status === status);
-            res.status(200);
-            res.json({ data: result});
+            try {
+                let allProjects = await storage.valuesWithKeyMatch(/project-/);
+                let result = allProjects.filter(p => p.status === status);
+                res.status(200);
+                res.json({ data: result });
             } catch (error) {
                 res.json({ status: 400, message: error.message });
             }
@@ -97,18 +109,27 @@ const { validateGivenName, validatePostcode, validateDescription, validateLastNa
             res.json({ error: "status value can only be 'pending', 'approved' or 'declined' ", status: 400 });
 
         } else {
-           
+
             let foundObject = await storage.getItem(`project-${id}`);
             let key = `project-${id}`
             foundObject.status = status;
             let result = await storage.updateItem(key, foundObject)
             res.json({ data: result.content, status: 200 })
 
-            
+
         }
 
     });
 
+    //// //http://localhost:3000/api/projects/vote
+    server.put('/api/projects/vote', async(req,res)=> {
+        let id = req.body.id;
+        let foundObject = await storage.getItem(`project-${id}`);
+            let key = `project-${id}`
+            foundObject.vote = foundObject.vote + 1;
+            let result = await storage.updateItem(key, foundObject)
+            res.json({data: result, status: 200})
+    })
 
     server.listen(port, () => console.log(`Server listening at port ${port}`));
 })();
