@@ -18,10 +18,9 @@ export default function ViewProjects() {
 
 
     function handleVoteClick(id, e) {
-        debugger;
+        
         e.preventDefault();
         setShowVoteButton(false);
-
         fetch("http://localhost:4000/api/projects/vote", {
 
             method: 'PUT',
@@ -34,7 +33,6 @@ export default function ViewProjects() {
             })
 
     }
-
 
     return (
         <div className="viewprojects-eligible">
