@@ -106,7 +106,7 @@ export default function ProjectsSubmitRegistry(props) {
                 <div className="error-messages">{postcodeEmpty && (<p style={{ color: "red" }}><b>Postcode requires 4 characters</b></p>)}</div>
                 <div className="error-messages">{postcodeDoesNotStartWith2 && (<p style={{ color: "red" }}><b>Postcode starting with the number "2" required</b></p>)}</div>
                 <label>* Title of Project</label>
-                <input className="project-submit-input" placeholder="Enter Title here" minLength="1" onChange={e => setTitle(e.target.value)} value={title}></input>
+                <input className="project-submit-input" placeholder="Enter Title here" minLength="1" maxLength="100" onChange={e => setTitle(e.target.value)} value={title}></input>
                 <div className="error-messages">{titleEmpty && (<p style={{ color: "red" }}><b>Title required</b></p>)}</div>
                 <label>* Description of Project</label>
                 <textarea className="project-submit-input-description" maxLength='500' minLength="1" placeholder="Enter Description here (max 500 characters)" onChange={e => setDescription(e.target.value)} value={description}></textarea>

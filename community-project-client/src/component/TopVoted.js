@@ -18,7 +18,7 @@ export default function TopVoted() {
             </div>
             <div className="top-voted-projects-list">
                 {projects.sort((p1, p2) => p2.voteCount - p1.voteCount).map(p =>
-                    <ul> {console.log(p)}
+                    <ul>
                         <li style={{ listStyle:"none", padding:"5px", border:"black solid 1px" }}>
                             <p>Title: {p.title}</p>
                             <p style={{ height:"150px" }}>Description: {p.description}</p>

@@ -24,17 +24,17 @@ module.exports = {
     },
 
     validateDescription: function (description) {
-        if (description.length > 300){
+        if (description.length > 500){
             return false;
         }
         return true;
     },
 
     validateTitle: function (title){
-        if(title.length > 101){
-            return true;
+        if(title.length > 100){
+            return false;
         }
-        return false;
+        return true;
     },
 
     validateStatus: function (status){
