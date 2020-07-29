@@ -9,6 +9,16 @@
     border: black solid 2px;
 }
 
+.row {
+    display: flex;
+  }
+  
+  .column {
+    flex: 50%;
+    padding: 20px;
+    margin: 10px
+  }
+
 nav {
     display: flex;
     justify-content: space-around;
