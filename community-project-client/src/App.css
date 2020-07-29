@@ -224,10 +224,7 @@ nav {
     padding: 20px;
     background-color: gray;
     color: white;
-    /* position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0; */
+    margin-left: 20px;
 }
 
 .footer-list {
