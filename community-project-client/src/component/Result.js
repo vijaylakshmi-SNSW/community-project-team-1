@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import '../App.css';
 
 export default function Result(props) {
+
+    
     
     const [updatedProject, setUpdatedProject] = useState();
 
@@ -13,14 +15,17 @@ export default function Result(props) {
             body: JSON.stringify({status: e.target.value,id:props.project.id})
         })
             .then((response) => response.json())
-            .then(json => {
-                setUpdatedProject(json.data);
-                props.updateMessage.setShowUpdateMessage(true); 
-            })
+            .then(json => { return (
+                setUpdatedProject(json.data),
+                props.updateMessage.setShowUpdateMessage(true)
+            )
+            })       
     }
-    
+    if (props.loading)
+        return <h2>Loading...</h2>;
     return (
         <div style={{border:'2px',borderStyle:'groove',padding:'10px',margin:'3.5px'}}>
+            
             <div>
             {
                 props.updateMessage.showUpdateMessage && updatedProject && 

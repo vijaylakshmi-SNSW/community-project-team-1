@@ -16,7 +16,7 @@ describe('tasks Community Project API', () => {
         done()
     });
 
-
+    
     // //Test the GET ROUTE
     describe("GET /api/projects", () => {
         it("It should GET all the eligible projects", (done) => {
@@ -26,64 +26,64 @@ describe('tasks Community Project API', () => {
                 .end((err, response) => {
                     response.should.have.status(200);
                     response.body.should.be.a('array');
-                    response.body.length.should.be.eq(28);
+                    response.body.length.should.to.be.above(0);
                     done();
                 })
         })
     });
 
-    // describe("POST /api/projects/submit", () => {
-    //     it("It should return a status of 200 (successful)", (done) => {
-    //         let project = { givenName: "Soonal", lastName: "Err", postcode: 2490, description: "Park  house" };
-    //         chai.request(server)
-    //             // post method (source URL)
-    //             .post('/api/projects/submit')
-    //             .send(project)
-    //             .end((err, response) => {  //expectation
-    //                 response.should.have.status(200);
-    //                 done();
-    //             });
-    //     });
-    //     it("It should not post a submit with any empty property", (done) => {
-    //         let project = { givenName: 'Fred', lastName: "Smith", postcode: 2557, description: "3 day work week." };
-    //         chai.request(server)
-    //             // post method (source URL)
-    //             .post('/api/projects/submit')
-    //             .send(project)
-    //             .end((err, response) => {  //expectation
-    //                 response.should.have.status(400);
-    //                 response.body.should.have.property('error');
-    //                 chai.expect(response.body.error).to.be.an('array');
-    //                 // chai.expect(response.body.error).to.have.lengthOf(1);
-    //                 chai.expect(response.body.error[0]).eq('Given name can only have 50 charecters');
-    //                 done();
-    //             });
-    //     });
+    describe("POST /api/projects/submit", () => {
+        it("It should return a status of 200 (successful)", (done) => {
+            let project = { givenName: "tesing", lastName: "Err", postcode: 2490, description: "Park  house", title: "testting"};
+            chai.request(server)
+                // post method (source URL)
+                .post('/api/projects/submit')
+                .send(project)
+                .end((err, response) => {  //expectation
+                    response.should.have.status(200);
+                    done();
+                });
+        });
+        it("It should not post a submit with any empty property", (done) => {
+            let project = { givenName: "tesing", lastName: "", postcode: 2490, description: "Park  house", title: "testting" };
+            chai.request(server)
+                // post method (source URL)
+                .post('/api/projects/submit')
+                .send(project)
+                .end((err, response) => {  //expectation
+                    response.should.have.status(400);
+                    response.body.should.have.property('error');
+                    chai.expect(response.body.error).to.be.an('array');
+                    // chai.expect(response.body.error).to.have.lengthOf(1);
+                    chai.expect(response.body.error[0]).eq('Last name can only have 50 charecters');
+                    done();
+                });
+        });
 
-    //     it("It should not post a submit with postcode starting with any number except 2 and more than length of 4", (done) => {
-    //         let project = { givenName: "Adam", lastName: "Smith", postcode: 3557, description: "3 day work week." };
-    //         chai.request(server)
-    //             // post method (source URL)
-    //             .post('/api/projects/submit')
-    //             .send(project)
-    //             .end((err, response) => {  //expectation
-    //                 response.should.have.status(400);
-    //                 response.body.should.have.property('error');
-    //                 chai.expect(response.body.error[0]).eq('incorrect postcode');
-    //                 done();
-    //             });
-    //     });
-    // });
+        it("It should not post a submit with postcode starting with any number except 2 and more than length of 4", (done) => {
+            let project = { givenName: "Adam", lastName: "Smith", postcode: 3557, description: "3 day work week.", title: "testting" };
+            chai.request(server)
+                // post method (source URL)
+                .post('/api/projects/submit')
+                .send(project)
+                .end((err, response) => {  //expectation
+                    response.should.have.status(400);
+                    response.body.should.have.property('error');
+                    chai.expect(response.body.error[0]).eq('incorrect postcode');
+                    done();
+                });
+        });
+    });
 
     describe("GET /api/projects/{status}", () => {
-        it("It should GET all the projects where status == 'declined'", (done) => {
+        it("It should GET all the projects where status == 'rejected'", (done) => {
             chai.request(server)
              // get method (source URL)
-                .get('/api/projects/{status}')
+                .get('/api/projects/rejected')
                 .end((err, response) => {
                     response.should.have.status(200);
-                    response.body.should.be.a('array');
-                    chai.expect(response.body.value.status).eq('declined');
+                    response.body.should.be.a('object');
+                    response.body.data[0].should.have.property('status').eql('rejected');
                     done();
                 })
         })
@@ -92,10 +92,11 @@ describe('tasks Community Project API', () => {
             chai.request(server)
 
                 // get method (source URL)
-                .get('/api/projects/{status}')
+                .get('/api/projects/approved')
                 .end((err, response) => {
                     response.should.have.status(200);
-                    response.body.should.be.a('array');
+                    response.body.should.be.a('object');
+                    response.body.data[0].should.have.property('status').eql('approved');
                     done();
                 })
         })
@@ -104,15 +105,16 @@ describe('tasks Community Project API', () => {
             chai.request(server)
 
                 // get method (source URL)
-                .get('/api/projects/{status}')
+                .get('/api/projects/pending')
                 .end((err, response) => {
                     response.should.have.status(200);
-                    response.body.should.be.a('array');
+                    response.body.should.be.a('object');
+                    response.body.data[0].should.have.property('status').eql('pending');
                     done();
                 })
         })
 
-        it("It should GET all the projects where status == '' ", (done) => {
+        it("It should return error where status == '' ", (done) => {
             chai.request(server)
 
                 // get method (source URL)
@@ -124,7 +126,7 @@ describe('tasks Community Project API', () => {
                 })
         })
 
-        it("It should GET all the projects where status == 'vhtht' ", (done) => {
+        it("It should return error where status == 'vhtht' ", (done) => {
             chai.request(server)
 
                 // get method (source URL)
@@ -136,7 +138,7 @@ describe('tasks Community Project API', () => {
                 })
         })
 
-        it("It should GET all the projects where status == @3432 ", (done) => {
+        it("It should return error where status == @3432 ", (done) => {
             chai.request(server)
 
                 // get method (source URL)
@@ -151,26 +153,25 @@ describe('tasks Community Project API', () => {
 
     describe("PUT /api/projects/status/update", () => {
         it("It should change the status of the project from 'pending' to approved", (done) => {
-            let data = { 'id': '66b13735-a34c-4a1b-8a0a-4b265b8d5f6d', 'status': 'approved' }
+            let data = { 'id': '2ae3f2ae-6da2-4852-b00c-3b1bf66e1d91', 'status': 'approved' }
             chai.request(server)
-                // post method (source URL)
                 .put('/api/projects/status/update')
                 .send(data)
-                .end((err, response) => {  //expectation
+                .end((err, response) => {  
                     response.should.have.status(200);
-                     chai.expect(response.body.data.value.status).eq('approved');
+                    response.body.data.value.should.have.property('status').eql('approved');
                     done();
                 });
         });
-        it("It should change the status of the project from 'pending' to declined", (done) => {
-            let data = { 'id': 'f1c24192-e2f0-46e1-baad-2b2eb4188ba6', 'status': 'declined' }
+        it("It should change the status of the project to rejected", (done) => {
+            let data = { 'id': '2ae3f2ae-6da2-4852-b00c-3b1bf66e1d91', 'status': 'rejected' }
             chai.request(server)
                 // post method (source URL)
                 .put('/api/projects/status/update')
                 .send(data)
                 .end((err, response) => {  //expectation
                     response.should.have.status(200);
-                    chai.expect(response.body.data.value.status).eq('declined');
+                    response.body.data.value.should.have.property('status').eql('rejected');
                     done();
                 });
         });
@@ -178,7 +179,6 @@ describe('tasks Community Project API', () => {
         it("It should return an error if the status is not 'approved' or 'declined ", (done) => {
             let data = { 'id': 'f1c24192-e2f0-46e1-baad-2b2eb4188ba6', 'status': 'gfdgrtge' }
             chai.request(server)
-                // post method (source URL)
                 .put('/api/projects/status/update')
                 .send(data)
                 .end((err, response) => {  //expectation
@@ -205,17 +205,20 @@ describe('tasks Community Project API', () => {
 
         describe("PUT /api/projects/vote", () => {
             it("it should return voteCount + 1", (done) => {
-                let data = { 'id': 'c4aa8b0f-b2e3-40c5-b6fe-cbe3cf42fe77' }
+                let data = { 'id': '2ae3f2ae-6da2-4852-b00c-3b1bf66e1d91'}
+                let voteCountValue = 0;
                 chai.request(server)
-                .get('/api/projects/id/:id')
-                .end(err,response)
-                let voteValue = response.vote
+                .get('/api/projects/id/2ae3f2ae-6da2-4852-b00c-3b1bf66e1d91')
+                .end((err,response)=>{ 
+                    console.log('count'+response.body.voteCount);
+                voteCountValue = Number(response.body.voteCount);
+                })
                 chai.request(server)
                 .put('/api/projects/vote')
                 .send(data)
                 .end((err, response) => {  //expectation
                     response.should.have.status(200);
-                    response.body.should.have.property('voteCount');
+                    response.body.data.content.value.should.have.property('voteCount').eq(voteCountValue + 1);
                     done();
                 });
             });
