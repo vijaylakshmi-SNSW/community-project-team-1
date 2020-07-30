@@ -8,7 +8,7 @@ export default function ViewProjects() {
 
     const [projects, setProjects] = useState([]);
     const [updateVoteCount, setUpdateVoteCount] = useState(0);
-    const [showVoteButton, setShowVoteButton] = useState(true);
+    const [showVoteButton] = useState(true);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [projectsPerPage] = useState(5);

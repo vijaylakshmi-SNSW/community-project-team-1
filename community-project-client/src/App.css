@@ -61,6 +61,12 @@ nav {
     margin-right: 50px;
 }
 
+.top-voted-container{
+    font-size: 16px;
+    font-family: "Gotham A", "Gotham B", Helvetica, Arial, Sans-Serif;
+    font-weight: 500;
+}
+
 .top-voted-title {
     padding-left: 20px;
     padding-bottom: 40px;
@@ -91,6 +97,9 @@ nav {
 
 .viewprojects-eligible {
     padding-left: 20px;
+    font-size: 16px;
+    font-family: "Gotham A", "Gotham B", Helvetica, Arial, Sans-Serif;
+    font-weight: 500;
 }
 
 .vote-button, .vote-button:focus {
@@ -211,10 +220,29 @@ nav {
     font-size: 16px;
     font-family: "Gotham A", "Gotham B", Helvetica, Arial, Sans-Serif;
     font-weight: 500;
-   
 }
 
 .projects-submit-registry-form input {
+    font-size: 16px;
+    font-family: "Gotham A", "Gotham B", Helvetica, Arial, Sans-Serif;
+    font-weight: 500;
+}
+
+.admin-container {
+    font-size: 16px;
+    font-family: "Gotham A", "Gotham B", Helvetica, Arial, Sans-Serif;
+    font-weight: 500;
+}
+
+.admin-select-options {
+    margin-left: 10px;
+}
+
+.map-projects {
+    margin-left: 20px;
+}
+
+.home-container {
     font-size: 16px;
     font-family: "Gotham A", "Gotham B", Helvetica, Arial, Sans-Serif;
     font-weight: 500;
