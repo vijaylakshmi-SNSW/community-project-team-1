@@ -26,7 +26,7 @@ export default function TopVoted() {
     return (
         <div className="top-voted-container">
             <div className="top-voted-title">
-                <h1>Popular Projects</h1>
+                <h1>Top Voted Projects</h1>
             </div>
             <div>
                 <TopVotedProjects

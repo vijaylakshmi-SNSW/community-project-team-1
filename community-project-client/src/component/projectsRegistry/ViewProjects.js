@@ -32,12 +32,13 @@ export default function ViewProjects() {
 
     return (
         <div className="viewprojects-eligible">
+                        <h1>Projects</h1>
             <div className="viewall-container">
-                <div className="eligible-projects-image">
+                <div className="eligible-projects-image" style={{ padding: '20px', textAlign:'center', maxWidth: "1224px"}}>
                     <img src="https://www.nsw.gov.au/sites/default/files/styles/content_x1/public/2020-02/My-Community-Project-Eligible-Projects-DataCard-Banner-v04.png?itok=TUeWyMMC" alt="Community Project"></img>
                 </div>
             </div>
-            <h1>Projects</h1>
+
             <p>Browse the projects that have been approved for consideration.</p>
             <p>New project submissions are still being accepted. </p>
             <Projects projects={currentProjects} updateVoteCount={updateVoteCount} showVoteButton={showVoteButton} />
